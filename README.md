@@ -1,48 +1,63 @@
-# Vitrina — Tu vidriera digital
+# wewant — diseño y desarrollo web
 
-Sitio de Vitrina: páginas web para negocios que quieren verse bien y vender sin complicaciones.
+Landing del servicio de desarrollo web de wewant (`[serv 04]`), con los cuatro niveles, las automatizaciones de IA y los mockups interactivos.
 
 ## Qué hay acá
 
-Un sitio estático, sin dependencias ni build. Todo el HTML, CSS y JavaScript viven en `index.html`.
+Sitio estático, sin dependencias ni build. Todo el HTML, CSS y JavaScript viven en `index.html`.
 
 ```
-index.html     todo el sitio (estructura + estilos + interacciones)
-favicon.svg    el toldo de Vitrina
+index.html                       todo el sitio
+assets/ww-mark-white.png         isotipo (blob) en blanco
+assets/ww-wordmark-white.png     wordmark "wewant" en blanco
+assets/favicon.png               favicon
 ```
 
-## Cómo cambiar el WhatsApp
+Los assets salieron de `Documents/wewant`: el isotipo se derivó de `w-logo.png` (invertido a blanco con fondo transparente) y el wordmark es `logos_ww-02.png` recortado.
 
-Abrí `index.html`, buscá el bloque `CONFIG` (arriba de todo del `<script>`) y cambiá los tres datos:
+## Configuración
+
+Arriba de todo del `<script>` está el bloque `CONFIG`:
 
 ```js
 const CONFIG = {
-  whatsapp : "5491112345678",   // tu número, sin +, sin espacios ni guiones
-  email    : "hola@vitrina.com.ar",
-  instagram: "vitrina"
+  whatsapp : "5491112345678",   // número real, sin +, sin espacios ni guiones
+  email    : "hola@wewant.ar",
+  instagram: "wewant.creatives"
 };
 ```
 
-Todos los botones de "Pedir presupuesto" salen de ahí. El del panel de cada nivel manda el mensaje ya escrito con el nivel que el visitante estaba mirando.
+De ahí salen todos los botones de WhatsApp y el mail del pie. El botón de cada nivel manda el mensaje ya escrito con el nivel que la persona estaba mirando, así se sabe de dónde viene la consulta.
 
-## Cómo editar los niveles
+**Pendiente:** el número de WhatsApp es de ejemplo. Cambiarlo antes de publicar.
 
-En el mismo `<script>` está el array `NIVELES`. Cada nivel es un objeto con:
+## Contenido editable
 
-| Campo | Qué es |
+Todo el contenido son arrays de JavaScript. Se agregan o sacan elementos y la página se re-arma sola.
+
+| Array | Qué controla |
 |---|---|
-| `nombre` | el título de la tarjeta |
-| `bajada` | la línea de abajo del título |
-| `que` | el párrafo "Qué es" |
-| `incluye` | la lista con tildes |
-| `para` | el párrafo "Para quién" |
-| `rubros` | las etiquetas redondeadas |
+| `NIVELES` | los cuatro niveles: nombre, descripción, qué es, qué incluye, para quién, rubros |
+| `AUTOS` | las ocho automatizaciones de IA |
+| `CLIENTES` | la grilla de clientes |
 
-Los add-ons están en `ADDONS` y las frases del traductor de jerga en `TRAD`. Se agregan o sacan elementos del array y la página se re-arma sola.
+Los mockups interactivos viven en el objeto `DEMOS` (`m1` a `m4`). Cada uno arma su propio HTML: el teléfono con la landing, el selector de pedidos que compone el mensaje de WhatsApp, el panel editable con vista pública en vivo y el dashboard con pestañas.
+
+## Sistema de diseño
+
+Tomado del branding de wewant.
+
+- **Fondo** negro puro `#000`, texto `#F0F0F0`, grises `#8C8C8C` y `#5A5A5A`
+- **Tipografía** Poppins en pesos 200/300/400. Todos los títulos en minúscula, tracking negativo
+- **Etiquetas** entre corchetes con numeración: `[ serv 04 ]`, `[ web 01 ]`, `[ ia 03 ]`
+- **Grilla** líneas verticales finas fijas de fondo, más marcadores geométricos (rombo, círculo, triángulo) en contorno
+- **Sin color.** La única excepción es el verde de WhatsApp dentro del mockup de pedidos, porque ahí representa la app real
+
+Las variables CSS están al principio del `<style>`.
 
 ## Cómo verlo local
 
-No hace falta servidor: doble clic en `index.html` y listo. Si preferís servirlo:
+Los assets son rutas relativas, así que conviene servirlo en vez de abrir el archivo directo:
 
 ```bash
 npx serve .
@@ -50,10 +65,10 @@ npx serve .
 
 ## Deploy
 
-Está pensado para Vercel como sitio estático. No requiere framework, ni build command, ni output directory — Vercel sirve `index.html` desde la raíz.
+Vercel como sitio estático. Framework Preset en **Other**, sin build command ni output directory.
 
 ## Pendientes
 
-- [ ] Cargar el número real de WhatsApp en `CONFIG`
-- [ ] Reemplazar los mockups ficticios por proyectos de clientes reales cuando los haya
-- [ ] Sumar imagen de Open Graph (`og:image`) para que se vea bien al compartir
+- [ ] Número real de WhatsApp y mail en `CONFIG`
+- [ ] Imagen de Open Graph 1200×630 para que el link se vea bien al compartirse
+- [ ] Reemplazar los mockups ficticios por proyectos reales cuando estén
