@@ -1,0 +1,22 @@
+# dependencias
+node_modules/
+
+# builds y cachés
+.vercel/
+.cache/
+dist/
+
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editores
+.vscode/
+.idea/
+*.swp
+
+# entorno
+.env
+.env.local
+*.local
